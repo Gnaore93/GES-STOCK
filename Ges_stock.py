@@ -15,8 +15,10 @@ from tabnanny import check
 import tkinter as tk
 from tkinter import*
 import json
+from tkinter import messagebox
 from tkinter.filedialog import asksaveasfile
 from tkinter.font import BOLD
+from unittest import expectedFailure
 from webbrowser import get
 from PIL import ImageTk,Image
 from tkinter import ttk
@@ -27,7 +29,7 @@ from turtle import color, left, onclick, position, width
 
 window = Tk()
 window.geometry('2000x2000')
-window.title("GES-STOCK")
+window.title("PHARMACIE SANTE DU BIEN-ETRE")
 window.configure(bg='white',background="gainsboro")
 
 Frame_window1 = LabelFrame(window,width=2000,height=70,padx=100)
@@ -51,8 +53,8 @@ img_label = Label(Frame_img,image=img,width=1500,height=1000).place(x=5,y=10)
 
 
 
-#titre = Label(Frame_img,width=45, text= "BIENVENUE A LA PHARMACIE SANTE DU BIEN-ETRE:",background="lavender",font=('Arial',45,"bold"))
-#titre.place(x=130,y=15)
+titre = Label(Frame_img,width=45, text= "BIENVENUE A LA PHARMACIE SANTE DU BIEN-ETRE:",background="lavender",font=('Arial',45,"bold"))
+titre.place(x=130,y=15)
 
 
 barre_rech = Label(Frame_window1,text="Rech/Email:",borderwidth=5,border=1,fg="black",bg="white")
@@ -122,8 +124,9 @@ def open_appr():
    fournisseur.grid(row=6,column=2)
 
    
-   
    def check():
+      liste =[]
+      listeStock =[]
        
       dictionnary ={
          "Produit": produit.get(),
@@ -134,16 +137,67 @@ def open_appr():
          "Fournisseur": fournisseur.get()
       }
 
-      json_object = json.dumps(dictionnary,indent=4)
-      with open("Approv.json","a") as f:
-         f.write(json_object)
+      dictionnaryStock ={
+         "Produit": produit.get(),
+         "Qte livree": qte_livree.get()
+      }
+      liste.append(dictionnary)
+      listeStock.append(dictionnaryStock)
+      print(listeStock)
+      if produit.get()=="" or code.get()=="" or qte_livree.get()=="" or prix_unitairée.get()==""or prix_global.get()=="" or fournisseur.get()=="":
+            messagebox.showerror("error","veuillez remplire tout les champs svp")
+      
+      try:
 
+         with open ("/Users/imac_33/GES-STOCK-1/Approv.json","r" ) as f:
+            liste = json.load(f)
+
+      except json.decoder.JSONDecodeError:
+         with open("/Users/imac_33/GES-STOCK-1/Approv.json","w") as f:
+            json.dump(liste,f,indent=4)
+
+      else:
+         with open ("/Users/imac_33/GES-STOCK-1/Approv.json","r" ) as f:
+            liste = json.load(f)
+            
+            liste.append(dictionnary)
+
+            with open("/Users/imac_33/GES-STOCK-1/Approv.json","w") as f:
+               json.dump(liste,f,indent=4)
+      
+
+      try:
+
+         with open ("/Users/imac_33/GES-STOCK-1/stock.json","r" ) as f:
+            listeStock = json.load(f)
+
+      except json.decoder.JSONDecodeError:
+         with open("/Users/imac_33/GES-STOCK-1/stock.json","w") as f:
+            json.dump(listeStock,f,indent=4)
+
+      else:
+         with open ("/Users/imac_33/GES-STOCK-1/stock.json","r" ) as f:
+            listeStock = json.load(f)
+            listeStock.append(dictionnary)
+
+            with open("/Users/imac_33/GES-STOCK-1/stock.json","w") as f:
+               json.dump(listeStock,f,indent=4)
+
+            if produit not in listeStock:
+               listeStock[produit]= produit
+               listeStock[produit]= qte_livree
+            else:
+               listeStock +=qte_livree
+
+      
       produit.delete(0,END)
       code.delete(0,END)
       qte_livree.delete(0,END)
       prix_unitairée.delete(0,END)
       prix_global.delete(0,END)
       fournisseur.delete(0,END)
+
+      
 
    treeframe = LabelFrame(win,width=1200,height=1000)
    treeframe.configure(bg="white")
@@ -234,6 +288,8 @@ def open_vente():
 
    def check():
        
+      liste =[]
+       
       dictionnary ={
          "Produit": produit.get(),
          "Code": code.get(),
@@ -241,16 +297,37 @@ def open_vente():
          "PA unitaire": prix_unitaire.get(),
          
       }
+      liste.append(dictionnary)
+      if produit.get()=="" or code.get()=="" or qte_livree.get()=="" or prix_unitaire.get()=="":
+            messagebox.showerror("error","veuillez remplire tout les champs svp")
+      
+      try:
 
-      json_object = json.dumps(dictionnary,indent=4)
-      with open("Vente.json","a") as f:
-         f.write(json_object)
+         with open ("/Users/imac_33/GES-STOCK-1/Vente.json","r" ) as f:
+            liste = json.load(f)
+
+      except json.decoder.JSONDecodeError:
+         with open("/Users/imac_33/GES-STOCK-1/Vente.json","w") as f:
+            json.dump(liste,f,indent=4)
+
+      else:
+         with open ("/Users/imac_33/GES-STOCK-1/Vente.json","r" ) as f:
+            liste = json.load(f)
+            
+         liste.append(dictionnary)
+
+         
+            
+         with open("/Users/imac_33/GES-STOCK-1/Vente.json","w") as f:
+            json.dump(liste,f,indent=4)
 
       produit.delete(0,END)
       code.delete(0,END)
       qte_livree.delete(0,END)
       prix_unitaire.delete(0,END)
       
+
+             
    btn = Button(Frame2,width=10,height=2,command=check , bg="teal",text="Valider",highlightbackground="blue",borderwidth=0)
    btn.grid(row=10, columnspan=4,pady=20,padx=10)
 
@@ -259,7 +336,7 @@ def open_vente():
 
 
    
-def open_stock():
+"""def open_stock():
        
    win_stock = Toplevel(Frame_window1)
    win_stock.geometry('1000x1000')
@@ -326,7 +403,7 @@ def open_stock():
    Fournisseur = Label(Frame2,text= "Fournisseur:")
    Fournisseur.grid(row=6,column=1)
    Fournisseur = Entry(Frame2,border=2)
-   Fournisseur.grid(row=6,column=2)
+   Fournisseur.grid(row=6,column=2)"""
 
 
 def open_fournisseur():
@@ -405,21 +482,45 @@ def open_fournisseur():
 
    def check():
        
+      liste =[]
+       
       dictionnary ={
-         "Produit": produit.get(),
+         "Nom": nom.get(),
          "Code": code.get(),
-         "Qte livree": contact.get(),
-         "PA unitaire": adresse.get(),
-         "PA global": ville.get(),
-         "Fournisseur": pays.get(),
+         "Contact": contact.get(),
+         "Adresse": adresse.get(),
+         "Ville": ville.get(),
+         "Pays": pays.get(),
          "Telephone": telephone.get(),
+         
       }
 
-      json_object = json.dumps(dictionnary,indent=4)
-      with open("fournisseur.json","a") as f:
-         f.write(json_object)
+      liste.append(dictionnary)
+      if nom.get()=="" or code.get()=="" or contact.get()=="" or adresse.get()==""or ville.get()=="" or pays.get()=="" or telephone.get()=="":
+            messagebox.showerror("error","veuillez remplire tout les champs svp")
+      
+      try:
 
-      produit.delete(0,END)
+         with open ("/Users/imac_33/GES-STOCK-1/fournisseur.json","r" ) as f:
+            liste = json.load(f)
+
+      except json.decoder.JSONDecodeError:
+         with open("/Users/imac_33/GES-STOCK-1/fournisseur.json","w") as f:
+            json.dump(liste,f,indent=4)
+
+      else:
+         with open ("/Users/imac_33/GES-STOCK-1/fournisseur.json","r" ) as f:
+            liste = json.load(f)
+            
+         liste.append(dictionnary)
+
+         
+            
+         with open("/Users/imac_33/GES-STOCK-1/fournisseur.json","w") as f:
+            json.dump(liste,f,indent=4)
+
+      
+      nom.delete(0,END)
       code.delete(0,END)
       contact.delete(0,END)
       adresse.delete(0,END)
@@ -442,9 +543,9 @@ photo2 = PhotoImage(file="add.png")
 photoimage2 = photo2.subsample(10,10)
 Button(Frame_window2,text="Ventes",image=photoimage2,compound=BOTTOM,command=open_vente,borderwidth=2).place(x=15,y=90)
 
-photo3 = PhotoImage(file="add.png")
+"""photo3 = PhotoImage(file="add.png")
 photoimage3 = photo3.subsample(10,10)
-Button(Frame_window2,text="Stocks",image=photoimage3,compound=BOTTOM,command=open_stock).place(x=15,y=150)
+Button(Frame_window2,text="Stocks",image=photoimage3,compound=BOTTOM,command=open_stock).place(x=15,y=150)"""
 
 photo4 = PhotoImage(file="add.png")
 photoimage4 = photo4.subsample(8,10)

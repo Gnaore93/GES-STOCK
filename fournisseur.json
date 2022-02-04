@@ -1,9 +1,29 @@
-{
-    "Produit": "",
-    "Code": "fghj",
-    "Qte livree": "vghj",
-    "PA unitaire": "v",
-    "PA global": "gh",
-    "Fournisseur": "gh",
-    "Telephone": "ghj"
-}
+[
+    {
+        "Nom": "vfbg",
+        "Code": "fgbh",
+        "Contact": "fgbh",
+        "Adresse": "gh",
+        "Ville": "gh",
+        "Pays": "ghn",
+        "Telephone": "gh"
+    },
+    {
+        "Nom": "",
+        "Code": "",
+        "Contact": "",
+        "Adresse": "",
+        "Ville": "",
+        "Pays": "",
+        "Telephone": ""
+    },
+    {
+        "Nom": "",
+        "Code": "",
+        "Contact": "",
+        "Adresse": "",
+        "Ville": "",
+        "Pays": "",
+        "Telephone": ""
+    }
+]

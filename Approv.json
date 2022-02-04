@@ -1,8 +1,78 @@
-{
-    "Produit": "gby",
-    "Code": "h",
-    "Qte livree": "yhy",
-    "PA unitaire": "h",
-    "PA global": "yh",
-    "Fournisseur": "yh"
-}
+[
+    {
+        "Produit": "fergt",
+        "Qte livree": "frght"
+    },
+    {
+        "Produit": "htryju,y",
+        "Code": "htryt,j",
+        "Qte livree": "23343",
+        "PA unitaire": "33",
+        "PA global": "3",
+        "Fournisseur": "bgh"
+    },
+    {
+        "Produit": "bghj",
+        "Code": "bgnhgj",
+        "Qte livree": "200",
+        "PA unitaire": "10",
+        "PA global": "2000",
+        "Fournisseur": "cghr"
+    },
+    {
+        "Produit": "dfgnh",
+        "Code": "gfnh",
+        "Qte livree": "300",
+        "PA unitaire": "100",
+        "PA global": "gnhj",
+        "Fournisseur": "ghnj"
+    },
+    {
+        "Produit": "dgfrgvutg",
+        "Code": "dgfh",
+        "Qte livree": "500",
+        "PA unitaire": "28",
+        "PA global": "23",
+        "Fournisseur": "cfbg"
+    },
+    {
+        "Produit": "bgnh",
+        "Code": "bghn",
+        "Qte livree": "300",
+        "PA unitaire": "23",
+        "PA global": "vbg",
+        "Fournisseur": "fbg n"
+    },
+    {
+        "Produit": "bgnh",
+        "Code": "bghn",
+        "Qte livree": "300",
+        "PA unitaire": "23",
+        "PA global": "vbg",
+        "Fournisseur": "fbg n"
+    },
+    {
+        "Produit": "bgnh",
+        "Code": "bghn",
+        "Qte livree": "300",
+        "PA unitaire": "23",
+        "PA global": "vbg",
+        "Fournisseur": "fbg n"
+    },
+    {
+        "Produit": "bgnh",
+        "Code": "bghn",
+        "Qte livree": "300",
+        "PA unitaire": "23",
+        "PA global": "vbg",
+        "Fournisseur": "fbg "
+    },
+    {
+        "Produit": "ghj",
+        "Code": "bghn,",
+        "Qte livree": "gnh",
+        "PA unitaire": "bgn",
+        "PA global": "n",
+        "Fournisseur": "gn"
+    }
+]
